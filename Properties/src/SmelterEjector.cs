@@ -1,5 +1,3 @@
-using System.Reflection;
-using System;
 using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
@@ -14,17 +12,17 @@ namespace SmelterEjectionControl
         const string pluginName = "SmelterEjector";
         const string pluginVersion = "1.0.0";
 
+        public static ManualLogSource logger = BepInEx.Logging.Logger.CreateLogSource(pluginName);
+
         private readonly Harmony HarmonyInstance = new Harmony(pluginGUID);
 
-        public static ManualLogSource logger = BepInEx.Logging.Logger.CreateLogSource(pluginName);
-        
         private void Awake()
         {
             Harmony.CreateAndPatchAll(typeof(SmelterEjectionControlPlugin));
-            Logger.LogInfo("SmelterEjectionControl: ItemDrop physics patch loaded!"); 
+            Logger.LogInfo("SmelterEjectionControl: ItemDrop physics patch loaded!");
         }
-        
-        [HarmonyPatch(typeof(ItemDrop), "Awake")] 
+
+        [HarmonyPatch(typeof(ItemDrop), "Awake")]
         [HarmonyPostfix]
         static void ModifySmelterDrops(ItemDrop instance)
         {
@@ -37,10 +35,10 @@ namespace SmelterEjectionControl
                 if (smelter != null)
                 {
                     float dist = Vector3.Distance(instance.transform.position, smelter.m_outputPoint.position);
-                    if (dist < 2.0f) 
+                    if (dist < 2.0f)
                     {
                         rb.AddForce(-Vector3.up * 15f, ForceMode.Impulse);
-                        break; 
+                        break;
                     }
                 }
             }
