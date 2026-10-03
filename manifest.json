@@ -1,0 +1,8 @@
+{
+  "name": "SmelterEjector",
+  "description": "Makes smelters of all types eject items with more force downwards, allowing funnels.",
+  "version_number": "1.0.0",
+  "website_url": "https://github.com/you/SmeleterEjector",
+  "dependencies": [
+  ]
+}
