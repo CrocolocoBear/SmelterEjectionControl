@@ -1,4 +1,4 @@
-# Better Wisps
+# Smelter Ejector
 
 ## Summary
 
